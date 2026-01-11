@@ -1,0 +1,5 @@
+.venv
+.idea
+NRrelic_bot.spec
+build
+dist

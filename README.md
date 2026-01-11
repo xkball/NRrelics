@@ -22,7 +22,7 @@ An automated relic screening assistant based on OCR and simulated input. Designe
  roi配置里如果填写0-1小数, 代表屏幕上相对位置, 大于一整数代表绝对位置, 请不要混用
 
  未进行多显示器适配, 游戏必须在主显示器上
-## ⚠️ Disclaimer (Must Read)
+## Disclaimer (Must Read)
 
 This software operates solely on **Optical Character Recognition (OCR)** and **simulated mouse/keyboard clicks**. It **does not** read or modify any game memory.
 
@@ -31,7 +31,7 @@ This software operates solely on **Optical Character Recognition (OCR)** and **s
 * **Liability**: This tool is for educational purposes only. The author is not responsible for any bans resulting from online use.
 * **Fair Play**: Not intended for malicious Save-Load (SL) exploits.
 
-## ✨ Features
+## Features
 
 * **Auto-Recognition**: Automatically identifies relic attributes using OCR.
 * **Dual Modes**: Supports both "Normal" and "Deepnight" relic modes.
@@ -40,7 +40,7 @@ This software operates solely on **Optical Character Recognition (OCR)** and **s
     * **Logic**: If a relic matches 2 or more attributes from *any* active preset, it is **kept**. Otherwise, it is automatically **sold**.
 * **Blacklist System**: Automatically detects and sells relics with "fatal" negative attributes (e.g., "HP Drain") defined in your blacklist.
 
-## 📖 How to Use
+## How to Use
 
 1.  **Launch**:
     * Open the game and stand in front of the **Pot Merchant** or the **Collector** interface.
@@ -53,7 +53,7 @@ This software operates solely on **Optical Character Recognition (OCR)** and **s
     * Click the **Start** button on the bot.
     * The bot will automatically loop: `Buy -> Scan -> Keep/Sell`.
 
-### ⌨️ Key Mappings
+### Key Mappings
 The software uses the default game keybinds:
 * **Interact (Buy/Confirm)**: `F`
 * **Sell**: `3`
@@ -61,6 +61,6 @@ The software uses the default game keybinds:
 
 ---
 
-## 🤝 Acknowledgments
+## Acknowledgments
 
 * **Data Source**: The relic attribute list used in this project is referenced from the guide by Bilibili content creator **Cinderella小辛**.

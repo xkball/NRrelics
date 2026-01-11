@@ -12,6 +12,7 @@ from nrrelics.data.Config import Config
 from nrrelics.data.loader import DataLoader
 from nrrelics.ui.AttributeSelector import AttributeSelector
 from nrrelics.ui.BackupTab import BackupTab
+from nrrelics.ui.ConfigTab import ConfigTab
 from nrrelics.ui.SLTab import SLTab
 from nrrelics.ui.PresetEditor import PresetEditor
 
@@ -64,6 +65,11 @@ class App(tb.Window):
         self.nb.add(self.tab4, text="4. 自动SL")
         self.ui_sl = SLTab(self.tab4, self.config)
         self.ui_sl.pack(fill=BOTH, expand=True)
+
+        self.tab5 = tb.Frame(self.nb)
+        self.nb.add(self.tab5, text="5. 配置文件")
+        self.ui_config = ConfigTab(self.tab5, self.config)
+        self.ui_config.pack(fill=BOTH, expand=True)
         
         ctrl = tb.Frame(self)
         ctrl.pack(fill=X, padx=20, pady=20)
@@ -147,7 +153,9 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 2:
         if sys.argv[1] == "-check_backup":
+            print("正在检查备份...")
             check_backup()
+            time.sleep(1)
     else:
         sched = BackgroundScheduler()
         sched.add_job(check_backup, "cron", hour=0, minute=1)

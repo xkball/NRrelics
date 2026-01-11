@@ -131,6 +131,7 @@ class BackupTab(tb.Frame):
         now = datetime.datetime.now()
         date_str = now.strftime("%Y%m%d")
         if check_exists and os.path.exists(os.path.join(save_dir,base,date_str)):
+            print(f"已存在备份,跳过")
             return
         time_str = now.strftime("%H_%M_%S")
         backup_dir = os.path.join(save_dir, base, date_str, time_str)

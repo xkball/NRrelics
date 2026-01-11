@@ -11,6 +11,9 @@ class Config:
         self.config_file = config_file
         self._init_defaults()
 
+    def get_config_file(self):
+        return self.config_file
+
     def _init_defaults(self):
         self.last_mode = "deepnight"
         self.presets_norm = [{"name": "默认预设", "items": []}]
