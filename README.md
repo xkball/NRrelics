@@ -1,7 +1,12 @@
 # NRrelic_Bot
 
 An automated relic screening assistant based on OCR and simulated input. Designed to save your time and fingers. Based on OCR, so it only support NR in Simplified Chinese version.
-
+## 本fork进行的修改
+ 添加自动备份功能(默认关闭), 开启后每日00:01或者第一次启动程序时自动进行备份
+ 为了自动进行每日备份, 可以在steam的 属性/启动选项中填写如下内容
+```bash
+    cmd /c "NRrelic_Bot.exe(改为实际路径) -check_backup && %command%"
+```
 ## ⚠️ Disclaimer (Must Read)
 
 This software operates solely on **Optical Character Recognition (OCR)** and **simulated mouse/keyboard clicks**. It **does not** read or modify any game memory.

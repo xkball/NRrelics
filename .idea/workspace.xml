@@ -5,20 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c63fab2c-5e9e-43a9-a525-c17f5c68b18d" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/NRrelics.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NRrelic_bot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/deepnight_neg.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/deepnight_pos.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/normal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/SweepConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/active-tab-highlighter-v2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/active-tab-highlighter.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/python/NRrelic_bot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/python/core/ProportionROI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/python/data/Config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/python/ui/AttributeSelector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/python/ui/BackupTab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/python/ui/SLTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/NRrelics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NRrelics.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NRrelic_bot.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/deepnight_neg.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/data/deepnight_neg.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/deepnight_pos.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/data/deepnight_pos.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/normal.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/data/normal.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DarkyenusTimeTracker">
+    <option name="totalTimeSeconds" value="6974" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -30,30 +42,46 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="381QFyFFnHCXFrdUI4dh8xWkDb5" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.NRrelic_bot.executor": "Run",
+    "Python.BackupTab.executor": "Run",
+    "Python.NRrelic_bot.executor": "Debug",
     "Python.background_test.executor": "Run",
     "Python.game_bot.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "dev.sweep.assistant.data.RecentlyUsedFiles": "src\\python\\core\\bot.py;src\\python\\core\\ProportionROI.py;.venv\\Lib\\site-packages\\mss\\models.py;.venv\\Lib\\site-packages\\mss\\base.py;src\\python\\ui\\BackupTab.py;README.md;src\\python\\ui\\BackupTree.py;src\\python\\NRrelic_bot.py;src\\python\\data\\Config.py;src\\python\\ui\\SLTab.py",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Admin/PycharmProjects/NRrelics",
+    "last_opened_file_path": "E:/code/py/NRrelics",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "sweep.chatMode": "Agent",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -65,14 +93,46 @@
       <recent name="C:\Users\Admin\PycharmProjects\NRrelics\data" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="NRrelic_bot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NRrelics" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/python" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/python/NRrelic_bot.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.NRrelic_bot" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-PY-252.28238.29" />
-        <option value="bundled-python-sdk-a101402ee41c-968fe969f28a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.28238.29" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.142" />
+        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
       </set>
     </attachedChunks>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
       <changelist id="c63fab2c-5e9e-43a9-a525-c17f5c68b18d" name="更改" comment="" />
@@ -81,26 +141,19 @@
       <option name="presentableId" value="Default" />
       <updated>1767964497448</updated>
       <workItem from="1767964498496" duration="20618000" />
+      <workItem from="1768057706314" duration="906000" />
+      <workItem from="1768062545328" duration="950000" />
+      <workItem from="1768066349705" duration="7268000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/NRrelic_bot.py</url>
-          <line>432</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NRrelics$game_bot.coverage" NAME="game_bot 覆盖结果" MODIFIED="1768026974001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NRrelics$background_test.coverage" NAME="background_test 覆盖结果" MODIFIED="1768022327670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NRrelics$NRrelic_bot.coverage" NAME="NRrelic_bot 覆盖结果" MODIFIED="1768027592718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NRrelics$game_bot.coverage" NAME="game_bot 覆盖结果" MODIFIED="1768026974001" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NRrelics$NRrelic_bot.coverage" NAME="NRrelic_bot 覆盖结果" MODIFIED="1768074115619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/python" />
+    <SUITE FILE_PATH="coverage/NRrelics$BackupTab.coverage" NAME="BackupTab 覆盖结果" MODIFIED="1768066532842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/python/ui" />
   </component>
 </project>
