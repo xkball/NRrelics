@@ -44,7 +44,7 @@ class SLTab(tb.Frame):
             width=15
         )
         self.sl_threshold_spinbox.pack(side='top', anchor='w', padx=10, pady=5)
-
+        self.sl_threshold_var.trace_add("write", self.update_sl_threshold)
         tb.Label(self.left_frame, text='出货量阈值', font=('bold', 10)).pack(side='top', anchor='w', padx=10, pady=5)
         self.keep_count_var = tb.IntVar(value=self.keep_count_threshold)
         self.keep_count_spinbox = tb.Spinbox(
@@ -57,6 +57,8 @@ class SLTab(tb.Frame):
             width=15
         )
         self.keep_count_spinbox.pack(side='top', anchor='w', padx=10, pady=5)
+        self.keep_count_var.trace_add("write", self.update_keep_count_threshold)
+
 
     def setup_right_panel(self):
         tb.Label(self.right_frame, text='备份列表', font=('bold', 10)).pack(side='top', anchor='w', padx=10, pady=5)
@@ -78,13 +80,18 @@ class SLTab(tb.Frame):
         self.config.use_auto_sl = self.use_auto_sl
         self.config.save()
 
-    def update_sl_threshold(self):
-        self.sl_threshold = self.sl_threshold_var.get()
-        self.config.sl_threshold = self.sl_threshold
-        self.config.save()
+    def update_sl_threshold(self, *args):
+        try:
+            self.sl_threshold = self.sl_threshold_var.get()
+            self.config.sl_threshold = self.sl_threshold
+            self.config.save()
+        except Exception as e:
+            pass
 
-    def update_keep_count_threshold(self):
-        self.keep_count_threshold = self.keep_count_var.get()
-        self.config.keep_count_threshold = self.keep_count_threshold
-        self.config.save()
-
+    def update_keep_count_threshold(self,*args):
+        try:
+            self.keep_count_threshold = self.keep_count_var.get()
+            self.config.keep_count_threshold = self.keep_count_threshold
+            self.config.save()
+        except Exception as e:
+            pass

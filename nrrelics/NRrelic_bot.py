@@ -21,7 +21,7 @@ class App(tb.Window):
 
     def __init__(self):
         super().__init__(themename="superhero")
-        self.title("NRrelic_bot V1.1")
+        self.title("NRrelic_bot fork V1.1")
         self.geometry("1100x850")
 
         self.norm_pos, self.deep_pos, self.deep_neg = DataLoader.get_data()

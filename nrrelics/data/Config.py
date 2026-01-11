@@ -25,7 +25,7 @@ class Config:
         self.sl_save_path = ""
         self.sl_threshold = 100000
         self.keep_count_threshold = 10
-        self.stone_roi = ProportionROI(0.3, 0.5, 0.7, 0.8)
+        self.stone_roi = ProportionROI(0.3, 0.5, 0.7, 0.76)
         self.rune_roi = ProportionROI(0.2578, 0.1, 0.3125, 0.131)
         self.buy_roi = ProportionROI(0.0465, 0.7757, 0.0996, 0.8701)
         self.buy_deepnight_roi = ProportionROI(0.1660, 0.7771, 0.2195, 0.8701)

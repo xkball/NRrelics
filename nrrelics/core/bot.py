@@ -36,7 +36,9 @@ class BotLogic:
         pydirectinput.keyUp(key)
         time.sleep(wait)
 
-    def get_screen_image(self, roi: ProportionROI = ProportionROI(0.3, 0.2, 0.7, 0.8)):
+    def get_screen_image(self, roi: ProportionROI = None):
+        if roi is None:
+            roi = self.config.stone_roi
         with mss.mss() as sct:
             monitor = sct.monitors[1]
             roi_ = roi.getROI(monitor)
@@ -89,11 +91,13 @@ class BotLogic:
         time.sleep(0.15)
         self.press(KEYS['interact'])
 
-        success, img = self.wait_for_result_screen(timeout=2.5)
-
-        if not success:
-            self.press(KEYS['interact'])
-            return
+        time.sleep(0.4)
+        img = self.get_screen_image()
+        # success, img = self.wait_for_result_screen(timeout=2.5)
+        #
+        # if not success:
+        #     self.press(KEYS['interact'])
+        #     return
 
         keep, reason, debug_info = self.check_logic(img, config)
 
@@ -103,7 +107,6 @@ class BotLogic:
             self.press(KEYS['interact'])
         else:
             self.log(f"× 卖出 | {reason}")
-            print(f"\n--- 卖出详情 ---{debug_info}\n----------------")
             self.press(KEYS['sell'], duration=0.15, wait=0.2)
             self.press(KEYS['interact'], duration=0.1, wait=0.2)
 
@@ -122,7 +125,7 @@ class BotLogic:
 
         # 1. 负面检查 (带纠错 + 全等匹配)
         if mode == "deepnight":
-            print(f"[负面检查] 开始比对黑名单...")
+
             for ocr_line in neg_lines:
                 corrected, score = find_best_match_in_library(ocr_line, self.master_library)
                 target = corrected if score > CORRECTION_THRESHOLD else ocr_line
@@ -132,10 +135,10 @@ class BotLogic:
                     if bad in target:
                         msg = f"致命负面 [{bad}] (来源: {ocr_line} -> {target})"
                         return False, msg, f"{msg}"
-            print(f"负面检查通过")
+
 
         # 2. 正面标准化
-        print(f"[正面标准化] 开始全库纠错...")
+
         normalized_pos_lines = []
         for ocr_line in pos_lines:
             if len(ocr_line) < 2: continue
@@ -149,7 +152,6 @@ class BotLogic:
                 print(f"'{ocr_line}' -> 无法识别/噪点")
 
         # 3. 遍历预设 (精确匹配)
-        print(f"[预设匹配] 开始匹配 {len(active_presets)} 套方案...")
 
         for preset in active_presets:
             preset_name = preset['name']
@@ -159,7 +161,6 @@ class BotLogic:
 
             for line in normalized_pos_lines:
                 for wanted in wanted_items:
-                    # [核心修改] 必须完全相等才算命中 (避免包含关系误判)
                     if wanted == line:
                         match_count += 1
                         hits.append(wanted)
@@ -168,6 +169,8 @@ class BotLogic:
             if match_count >= 2:
                 success_msg = f"命中方案[{preset_name}]: {hits}"
                 print(f"判定保留! {success_msg}")
+                for line in normalized_pos_lines:
+                    self.log(line)
                 return True, success_msg, ""
             else:
                 print(f"预设[{preset_name}] 不满足: {match_count}/2 {hits}")
@@ -177,10 +180,9 @@ class BotLogic:
     def getRune(self) -> int:
         img = self.get_screen_image(ProportionROI(0.2578, 0.1, 0.3125, 0.131))
         res, _ = self.ocr(img)
-        if not res:
-            pass
-        for line in res:
-            print(line)
+        if not res or res.__len__() != 1:
+            return -1
+        return int(res[0][1])
 
     def exitToGameMenu(self):
         self.press(KEYS['exit'], wait= 0.2)
@@ -200,7 +202,8 @@ class BotLogic:
             roi = self.config.buy_roi
             if config["mode"] == "deepnight":
                 roi = self.config.buy_deepnight_roi
-            pydirectinput.moveTo(roi.getCenter(monitor))
+            px, py = roi.getCenter(monitor)
+            pydirectinput.moveTo(px, py)
         self.log(">>> 开始循环...")
         loopCount = 0
         while not self.should_stop:
@@ -216,5 +219,6 @@ class BotLogic:
                         self.exitToGameMenu()
                         time.sleep(10)
                         BackupTab.runRestoreStatic(self.config.save_path, self.config.sl_save_path)
+                        break
             self.purchase_loop(config)
             time.sleep(0.1)
