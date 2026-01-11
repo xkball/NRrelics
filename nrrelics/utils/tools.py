@@ -8,7 +8,14 @@ import difflib
 KEYS = {
     'interact': 'f',
     'sell': '3',
-    'stop': 'f11'
+    'stop': 'f11',
+    'exit': 'esc',
+    'menu_left': 'f1',
+    'up': 'up',
+    'left': 'left',
+    'right': 'right',
+    'down': 'down'
+
 }
 
 FUZZY_THRESHOLD = 0.7
@@ -25,13 +32,11 @@ IGNORE_TEXTS = [
 def get_resource_path(relative_path):
     """ 获取资源绝对路径，兼容开发环境和打包后的 EXE 环境 """
     if hasattr(sys, '_MEIPASS'):
-        # PyInstaller 打包后的临时目录
         base_path = sys._MEIPASS
+        return os.path.join(base_path, relative_path)
     else:
-        # 开发模式下，使用当前脚本所在的目录
         base_path = os.path.dirname(os.path.abspath(__file__))
-
-    return os.path.join(base_path, '../../assets', relative_path)
+        return os.path.join(base_path, '../../assets', relative_path)
 
 def normalize_text(text):
     if not text: return ""

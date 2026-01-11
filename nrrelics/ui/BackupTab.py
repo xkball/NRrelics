@@ -1,9 +1,9 @@
 import datetime
 import os
 import shutil
-
+from pubsub import pub
 import ttkbootstrap as tb
-from src.python.ui.BackupTree import BackupTree
+from nrrelics.ui.BackupTree import BackupTree
 
 
 class BackupTab(tb.Frame):
@@ -28,6 +28,7 @@ class BackupTab(tb.Frame):
         self.backup_tree = BackupTree(self, self.save_dir, update_button=self.restore_btn)
         self.backup_tree.pack(fill='both', expand=True, padx=10, pady=5)
         self.restore_btn.pack(side='left', padx=10, pady=5)
+        pub.subscribe(lambda p : self.backup_tree.set_watch_dir(p), "save_path_changed")
 
     def toggle_edit(self):
         if self.path_entry.cget('state') == 'readonly':
@@ -41,7 +42,7 @@ class BackupTab(tb.Frame):
                 self.config.save()
                 self.path_entry.configure(state='readonly')
                 self.edit_btn.configure(text='编辑存档文件夹')
-                self.backup_tree.set_watch_dir(self.save_dir)
+                pub.sendMessage("save_path_changed", new_path=new_path)
 
     def toggle_auto_backup(self):
         self.auto_backup = self.auto_backup_btn.instate(['selected'])
@@ -73,17 +74,7 @@ class BackupTab(tb.Frame):
         src_path = self.backup_tree.get_selected_file()
         if not src_path:
             return
-        if not os.path.isfile(src_path):
-            return
-        dst_path = os.path.join(self.save_dir, os.path.basename(src_path))
-        self.runBackup(base="restore")
-        try:
-            shutil.copy2(src_path, dst_path)
-
-            print(f"已恢复备份备份：{src_path} -> {dst_path}")
-        except (IOError, OSError) as e:
-            print(f"恢复备份失败：{e}")
-            pass
+        BackupTab.runRestoreStatic(self.save_dir, src_path)
 
     @staticmethod
     def getDefaultSavePath():
@@ -103,6 +94,20 @@ class BackupTab(tb.Frame):
     def runBackup(self, base = "backup"):
         BackupTab.runBackupStatic(self.save_dir, base)
         self.backup_tree.refresh_tree()
+
+    @staticmethod
+    def runRestoreStatic(save_dir,src_path):
+        if not os.path.isfile(src_path):
+            return
+        dst_path = os.path.join(save_dir, os.path.basename(src_path))
+        BackupTab.runBackupStatic(save_dir, base="restore")
+        try:
+            shutil.copy2(src_path, dst_path)
+            shutil.copy2(src_path, dst_path+".bak")
+            print(f"已恢复备份备份：{src_path} -> {dst_path}")
+        except (IOError, OSError) as e:
+            print(f"恢复备份失败：{e}")
+            pass
 
     @staticmethod
     def runBackupStatic(save_dir, base = "backup", check_exists = False):

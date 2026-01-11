@@ -2,7 +2,7 @@ import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 from tkinter import simpledialog, filedialog, messagebox
 
-from src.python.ui.AttributeSelector import AttributeSelector
+from nrrelics.ui.AttributeSelector import AttributeSelector
 
 
 class PresetEditor(tb.Frame):

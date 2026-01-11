@@ -1,5 +1,5 @@
 import os
-from src.python.utils.tools import normalize_text, get_resource_path
+from nrrelics.utils.tools import normalize_text, get_resource_path
 
 class DataLoader:
     @staticmethod

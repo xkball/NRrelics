@@ -8,7 +8,7 @@ class BackupTree(tb.Frame):
         self.watch_dir = watch_dir
         self.update_button = update_button
         self.all_backups = []
-
+        self.update_button.configure(state='disabled')
         self.tree_frame = tb.Frame(self)
         self.tree_frame.pack(fill='both', expand=True, padx=10, pady=5)
         

@@ -1,22 +1,27 @@
+import datetime
 import os
 import time
-import datetime
-import pydirectinput
-from rapidocr_onnxruntime import RapidOCR
+
+import cv2
 import mss
 import numpy as np
-import cv2
+import pydirectinput
+from rapidocr_onnxruntime import RapidOCR
 
-from src.python.core.ProportionROI import ProportionROI
-from src.python.utils.tools import KEYS, CORRECTION_THRESHOLD, normalize_text, find_best_match_in_library
-from src.python.data.loader import DataLoader
+from nrrelics.core.ProportionROI import ProportionROI
+from nrrelics.data.Config import Config
+from nrrelics.data.loader import DataLoader
+from nrrelics.ui.BackupTab import BackupTab
+from nrrelics.utils.tools import KEYS, CORRECTION_THRESHOLD, normalize_text, find_best_match_in_library
+
 
 class BotLogic:
-    def __init__(self, log_func):
+    def __init__(self, log_func, config : Config):
         self.log = log_func
+        self.config = config
         self.should_stop = False
         self.master_library = DataLoader.get_master_library()
-
+        self.keep_count = 0
         if not os.path.exists("logs"): os.makedirs("logs")
         try:
             self.ocr = RapidOCR()
@@ -34,7 +39,7 @@ class BotLogic:
     def get_screen_image(self, roi: ProportionROI = ProportionROI(0.3, 0.2, 0.7, 0.8)):
         with mss.mss() as sct:
             monitor = sct.monitors[1]
-            roi_ = roi.get(monitor)
+            roi_ = roi.getROI(monitor)
             img = np.array(sct.grab(roi_))
             return cv2.cvtColor(img, cv2.COLOR_BGRA2BGR)
 
@@ -66,20 +71,6 @@ class BotLogic:
         list_pos = [normalize_text(line[1]) for line in res_pos] if res_pos else []
         return list_pos, list_neg
 
-    def validate_item_in_shop(self, mode):
-        self.log("正在校验商店选中商品...")
-        img = self.get_screen_image()
-        res, _ = self.ocr(img)
-        text = "".join([line[1] for line in res]) if res else ""
-        has_stone = "原石" in text
-        has_deep = "黯淡" in text or "暗淡" in text
-        if mode == "deepnight":
-            if has_stone and has_deep: return True
-        else:
-            if has_stone and not has_deep: return True
-        self.log(f"校验失败。模式:{mode}。")
-        return False
-
     def wait_for_result_screen(self, timeout=2.5):
         start_time = time.time()
         while time.time() - start_time < timeout:
@@ -93,10 +84,10 @@ class BotLogic:
         return False, None
 
     def purchase_loop(self, config):
-        self.press(KEYS['interact'], duration=0.03, wait=0.05)
-        self.press(KEYS['interact'], duration=0.03, wait=0.05)
+        self.press(KEYS['interact'])
+        self.press(KEYS['interact'])
         time.sleep(0.15)
-        self.press(KEYS['interact'], duration=0.03, wait=0.05)
+        self.press(KEYS['interact'])
 
         success, img = self.wait_for_result_screen(timeout=2.5)
 
@@ -107,13 +98,14 @@ class BotLogic:
         keep, reason, debug_info = self.check_logic(img, config)
 
         if keep:
+            self.keep_count += 1
             self.log(f"√ 保留 | {reason}")
             self.press(KEYS['interact'])
         else:
             self.log(f"× 卖出 | {reason}")
             print(f"\n--- 卖出详情 ---{debug_info}\n----------------")
-            self.press(KEYS['sell'], duration=0.15, wait=0.1)
-            self.press(KEYS['interact'], duration=0.1, wait=0.1)
+            self.press(KEYS['sell'], duration=0.15, wait=0.2)
+            self.press(KEYS['interact'], duration=0.1, wait=0.2)
 
     def check_logic(self, img, config):
         mode = config['mode']
@@ -139,7 +131,7 @@ class BotLogic:
                     # 负面依然建议用“包含”逻辑，因为负面词条往往是句子的一部分
                     if bad in target:
                         msg = f"致命负面 [{bad}] (来源: {ocr_line} -> {target})"
-                        return False, msg, f"❌ {msg}"
+                        return False, msg, f"{msg}"
             print(f"负面检查通过")
 
         # 2. 正面标准化
@@ -182,7 +174,7 @@ class BotLogic:
 
         return False, "不符合任何启用预设", "不满足条件"
 
-    def getRune(self):
+    def getRune(self) -> int:
         img = self.get_screen_image(ProportionROI(0.2578, 0.1, 0.3125, 0.131))
         res, _ = self.ocr(img)
         if not res:
@@ -190,12 +182,39 @@ class BotLogic:
         for line in res:
             print(line)
 
+    def exitToGameMenu(self):
+        self.press(KEYS['exit'], wait= 0.2)
+        self.press(KEYS['exit'], wait= 0.2)
+        self.press(KEYS['menu_left'], wait= 0.2)
+        self.press(KEYS['up'], wait= 0.2)
+        self.press(KEYS['interact'], wait=0.2)
+        self.press(KEYS['interact'], wait=0.2)
+        self.press(KEYS['left'], wait=0.2)
+        self.press(KEYS['interact'], wait=0.2)
+
     def run(self, config):
-        self.log(">>> 3秒后开始校验...")
+        self.log(">>> 请在3秒内聚集游戏窗口")
         time.sleep(3)
-        #if not self.validate_item_in_shop(config['mode']): return
-        self.log(">>> 校验通过，开始循环...")
+        with mss.mss() as sct:
+            monitor = sct.monitors[1]
+            roi = self.config.buy_roi
+            if config["mode"] == "deepnight":
+                roi = self.config.buy_deepnight_roi
+            pydirectinput.moveTo(roi.getCenter(monitor))
+        self.log(">>> 开始循环...")
+        loopCount = 0
         while not self.should_stop:
-            self.getRune()
-            # self.purchase_loop(config)
+            loopCount += 1
+            if loopCount % 20 == 0 and self.config.use_auto_sl:
+                rune = self.getRune()
+                if 0 < rune < self.config.sl_threshold:
+                    self.log(f"卢恩低于阈值 ({rune}/{self.config.sl_threshold})，执行自动SL.")
+                    if self.keep_count >= self.config.keep_count_threshold:
+                        self.log("出货量达标, 自动停止")
+                        break
+                    else:
+                        self.exitToGameMenu()
+                        time.sleep(10)
+                        BackupTab.runRestoreStatic(self.config.save_path, self.config.sl_save_path)
+            self.purchase_loop(config)
             time.sleep(0.1)

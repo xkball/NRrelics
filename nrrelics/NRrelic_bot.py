@@ -7,24 +7,24 @@ import ttkbootstrap as tb
 from apscheduler.schedulers.background import BackgroundScheduler
 from ttkbootstrap.constants import *
 
-from core.bot import BotLogic
-from src.python.data.Config import Config
-from src.python.data.loader import DataLoader
-from src.python.ui.BackupTab import BackupTab
-from src.python.ui.SLTab import SLTab
-from ui.PresetEditor import AttributeSelector, PresetEditor
+from nrrelics.core.bot import BotLogic
+from nrrelics.data.Config import Config
+from nrrelics.data.loader import DataLoader
+from nrrelics.ui.AttributeSelector import AttributeSelector
+from nrrelics.ui.BackupTab import BackupTab
+from nrrelics.ui.SLTab import SLTab
+from nrrelics.ui.PresetEditor import PresetEditor
 
 
 class App(tb.Window):
 
     def __init__(self):
         super().__init__(themename="superhero")
-        self.title("NRrelic_bot V1.0")
+        self.title("NRrelic_bot V1.1")
         self.geometry("1100x850")
 
         self.norm_pos, self.deep_pos, self.deep_neg = DataLoader.get_data()
         self.logic = None
-
         self.config = Config()
         self.config.load()
         self.setup_ui()
@@ -46,7 +46,7 @@ class App(tb.Window):
         self.nb = tb.Notebook(self)
         self.nb.pack(fill=BOTH, expand=True, padx=10)
         self.tab1 = tb.Frame(self.nb)
-        self.nb.add(self.tab1, text="1. 策略预设 (定义多套保留方案)")
+        self.nb.add(self.tab1, text="1. 策略预设")
         self.ui_presets = PresetEditor(self.tab1, [])
         self.ui_presets.pack(fill=BOTH, expand=True)
 
@@ -96,7 +96,7 @@ class App(tb.Window):
             return
         config = {'mode': self.mode_var.get(), 'presets': current_presets, 'bad_neg': self.ui_neg.get_list()}
         self.save_to_json()
-        self.logic = BotLogic(self.log)
+        self.logic = BotLogic(self.log, self.config)
         t = threading.Thread(target=self.logic.run, args=(config,))
         t.daemon = True
         t.start()
