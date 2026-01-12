@@ -2,6 +2,7 @@ opencv-python
 mss
 numpy
 pydirectinput
+onnxruntime
 rapidocr_onnxruntime
 keyboard
 ttkbootstrap
