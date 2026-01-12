@@ -26,8 +26,8 @@ class BotLogic:
         try:
             self.ocr = RapidOCR()
             self.log("OCR 引擎初始化成功")
-        except:
-            self.log("错误: OCR 初始化失败")
+        except Exception as e:
+            self.log(f"错误: OCR 初始化失败 ({e})")
 
     def press(self, key, duration=0.03, wait=0.05):
         if self.should_stop: return

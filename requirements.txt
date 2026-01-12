@@ -1,0 +1,9 @@
+opencv-python
+mss
+numpy
+pydirectinput
+rapidocr_onnxruntime
+keyboard
+ttkbootstrap
+apscheduler
+pubsub
