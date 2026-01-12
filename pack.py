@@ -11,6 +11,10 @@ args = [
     '-F',
     '-w',
     '--add-data=assets/:.',
+    '--collect-all=onnxruntime',
+    '--collect-all=rapidocr_onnxruntime',
+    '--copy-metadata=onnxruntime',
+    '--copy-metadata=rapidocr_onnxruntime',
 ]
 
 if len(sys.argv) > 1:
