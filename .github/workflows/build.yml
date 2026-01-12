@@ -26,6 +26,7 @@ jobs:
         pip install pyinstaller
         
     - name: Build with PyInstaller
+      id: build
       run: python pack.py ${{ steps.short-sha.outputs.sha }}
       
     - name: Upload artifact
