@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{ steps.build.outputs.artifact_name }}
-        path: dist/*.exe
+        path: dist/*
